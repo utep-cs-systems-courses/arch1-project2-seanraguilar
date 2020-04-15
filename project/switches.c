@@ -4,6 +4,7 @@
 #include "buzzer.h"
 #include "libTimer.h"
 #include "stateMachine.h"
+//#include "toggle.h"
 
 char switch_state_down, switch_state_changed, v1, v2, v3, v4;
 
@@ -24,6 +25,7 @@ void switch_init()/* setup switch */
   P2DIR &= ~SWITCHES;/* set switches' bits for input */
   switch_update_interrupt_sense();
   switch_interrupt_handler();
+  led_update();
 }
 
 void switch_interrupt_handler()
@@ -38,26 +40,33 @@ void switch_interrupt_handler()
   if (v1){
     switch_state_down = v1;
     switch_state_changed = 1;
+    led_update();
     siren();
   }
   else if (v2) {
     switch_state_down = v2;
-    switch_state_changed = 1;
+    switch_state_changed = 2;
     imperialMarch();
   }
   else if (v3) {
     switch_state_down = v3;
-    switch_state_changed = 1;
+    switch_state_changed = 3;
     marioThemeSong();
+    //toggle();
   }
   else if (v4) {
     switch_state_down = v4;
-    switch_state_changed = 1;
+    switch_state_changed = 4;
     buzzer_set_period(0);
+    //toggle();
   }
   else {
     switch_state_down = 0;
     switch_state_changed = 1;
     buzzer_set_period(0);
+    led_update();
+    dim_on = 0;    
   }
+  switch_state_changed = 1;
+  led_update();
 }
