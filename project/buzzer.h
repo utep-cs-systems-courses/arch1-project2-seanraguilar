@@ -4,4 +4,8 @@
 void buzzer_init();
 void buzzer_set_period(short cycles);
 
+void siren();
+void imperialMarch();
+void marioThemeSong();
+
 #endif
