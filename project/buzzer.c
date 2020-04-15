@@ -3,6 +3,7 @@
 #include "stateMachine.h"
 #include <msp430.h>
 #include "led.h"
+#include "switches.h"
 
 void buzzer_init(){
   /*
@@ -24,6 +25,7 @@ void buzzer_set_period(short cycles){
   CCR0 = cycles;
   CCR1 = cycles >> 1; //one half cycle
 }
+
 
 void siren()
 {
@@ -69,7 +71,7 @@ void imperialMarch()
 		3729.31, 0, 3520.00, 0, 3729.31 // Bb A Bb
 		//0 // To End It 
   };
-  while (i < sizeof(song2))
+  while (i < sizeof(song2)) // I could be using a delay function, instead of using brute force
   {
     int first_loop = 0;
     while (first_loop < 5)
