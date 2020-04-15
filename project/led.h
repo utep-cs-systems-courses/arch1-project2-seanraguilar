@@ -1,4 +1,5 @@
 #ifndef led_included
+
 #define led_included
 
 #include <msp430.h>
@@ -8,7 +9,7 @@
 #define LEDS (BIT0 | BIT6)
 
 // These are boolean flags
-extern unsigned char red_on, green_on;
+extern unsigned char red_on, green_on, dim_on;
 extern unsigned char led_changed;
 
 void led_init();
